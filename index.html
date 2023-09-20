@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+	<meta charset="utf-8">
+	<title>UPI QR Code Generator | #CashlessConsumer</title>
+	<meta name="description" content="Get QR Code for your Virtual Payment Address (VPA) for instant UPI transfer.">
+	<meta name="author" content="Srikanth L">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/touch/apple-touch-icon-144x144-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/touch/apple-touch-icon-114x114-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/touch/apple-touch-icon-72x72-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" href="img/touch/apple-touch-icon-57x57-precomposed.png">
+	<link rel="shortcut icon" sizes="196x196" href="img/touch/touch-icon-196x196.png">
+	<link rel="shortcut icon" href="img/touch/apple-touch-icon.png">
+	<meta name="msapplication-TileImage" content="img/touch/apple-touch-icon-144x144-precomposed.png">
+	<meta name="msapplication-TileColor" content="#222222">
+
+	<!-- FONT –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet"/>
+	<link rel="stylesheet" href="https://opensource.keycdn.com/fontawesome/4.6.3/font-awesome.min.css" integrity="sha384-Wrgq82RsEean5tP3NK3zWAemiNEXofJsTwTyHmNb/iL3dP/sZJ4+7sOld1uqYJtE" crossorigin="anonymous">
+
+	<!-- CSS –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	<link rel="stylesheet" href="css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="css/style.css"/>
+	<link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.3.1/jssocials.css" />
+	<link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.3.1/jssocials-theme-flat.css" />
+
+	<!-- L10N ------------------------------------------------- -->
+	<link rel="localization" hreflang="en" href="i18n/upiqrcode-en.json" type="application/l10n+json"/>
+	<link rel="localization" hreflang="kn" href="i18n/upiqrcode-kn.json" type="application/l10n+json"/>
+	<link rel="localization" hreflang="ta" href="i18n/upiqrcode-ta.json" type="application/l10n+json"/>
+	<link rel="localization" hreflang="te" href="i18n/upiqrcode-te.json" type="application/l10n+json"/>
+
+	<!-- Favicon –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	<link rel="icon" type="image/png" href="images/favicon.png">
+
+	<!-- Jquery -->
+
+</head>
+<body>
+	<article>
+		<div class="title-banner" style="background-color:white">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12" style="text-align: center;">
+						<img style="width: 30%" src="img/img3.jpg" >
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container content">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="inputs">
+						<div class="row">
+							<div id="vpa" class="col-md-6" style="margin-top: 10px;">
+								<form>
+									<div class="form-group hidden">
+										<label for="pn" data-i18n="upiqrc-lbl-name">Merchant</label>
+										<div class="input-group">
+											<input class="form-control" readonly id="pn" placeholder="Your name" value="Hungerian"/>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="pa">VPA</label>
+										<div class="input-group">
+											<input class="form-control" id="pa" aria-label="Your VPA identifier" placeholder="Your VPA identifier" value="7004035266"/>
+											<span class="input-group-addon">@</span>
+											<input class="form-control" id="psp" aria-label="Your VPA handle" placeholder="Your VPA handle" value="ybl"/>
+										</div>
+										<label for="pa">Amount</label>
+										<div class="input-group">
+											<input class="form-control" id="am" aria-label="Amount" value="0"/>
+										</div>
+									</div>
+									<div>
+									<a class="btn btn-primary" style="background-color: #EF7F1B; border-color:white" onclick="generatePhoneQRCode()">Generate</a></div>
+									<p>&nbsp;</p>
+								</form>
+							</div>
+						</div>
+						<div class="row">
+							<div id="vpaqr" class="col-md-12" style="margin-top: 10px; display: none; text-align: center;">
+								<div id="printableArea" class="printableArea">
+									<div id="payQRCode"></div>
+									<button class="btn" style="    height: 100px; width: 100%; background-color: white;" onclick="backToHome()"> </button>
+								</div>
+								<img src="img/UPILogo.jpg" id="upilogo" hidden="true"/>
+							</div>
+							<div>
+								<p class="hidden"><img src="img/UPILogo.jpg" id="upifulllogo" width="50%" height="30%" hidden="true"/></p>
+							</div>
+						</div>
+						<hr/>
+					</div>
+
+				</div>
+			</div>
+		</div> <!-- end .container -->
+	</article>
+<!-- End Document –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	<script src="./src/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.jssocials/1.3.1/jssocials.min.js"></script>
+	<script>
+		$("#sharesocial").jsSocials({
+			url: "https://CashlessConsumer.github.io/CashlessConsumer/qrcode.html",
+			text: "Create your #UPI QRCode now",
+			showCount: "inside",
+			showLabel: false,
+			shareIn: "popup",
+			shares: ["email", "twitter", "facebook", "whatsapp", "googleplus"]
+		});
+	</script>
+
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lrsjng.jquery-qrcode/0.14.0/jquery-qrcode.min.js"></script>
+
+	<script src="./src/jquery.i18n.js"></script>
+	<script src="./src/jquery.i18n.messagestore.js"></script>
+	<script src="./src/jquery.i18n.fallbacks.js"></script>
+	<script src="./src/jquery.i18n.parser.js"></script>
+	<script src="./src/jquery.i18n.emitter.js"></script>
+	<script src="./src/jquery.i18n.language.js"></script>
+	
+
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2014-11-29/FileSaver.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/js-url/2.3.1/url.min.js"></script>
+	<script src="js/helper.js"></script>
+	<script src="js/main.js"></script>
+	<script src="js/l10n.js"></script>
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-83520638-1', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+	</body>
+</html>
